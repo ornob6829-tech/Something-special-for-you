@@ -1,0 +1,1007 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Dark Royal Invitation for Maisha 👑🥀</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js for Ambient Audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        royal: {
+                            base: '#0a0612',
+                            midnight: '#140822',
+                            deep: '#1d0b30',
+                            burgundy: '#5a0016',
+                            crimson: '#8b0020',
+                            brightRed: '#d90429',
+                            gold: '#d4af37',
+                            lightGold: '#f3e5ab'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'royal-glow': '0 0 35px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(139, 0, 32, 0.3)',
+                        'crimson-flare': '0 0 30px rgba(217, 4, 41, 0.6), 0 0 50px rgba(139, 0, 32, 0.4)',
+                        'gold-border': '0 0 20px rgba(212, 175, 55, 0.4)',
+                        'white-pop': '0 0 25px rgba(255, 255, 255, 0.9), 0 0 15px rgba(212, 175, 55, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0612;
+            color: #f3e5ab;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Canvas overlay */
+        #ambientCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Royal Fog & Glow */
+        .royal-fog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 25%, rgba(139, 0, 32, 0.35) 0%, rgba(20, 8, 34, 0.95) 75%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Royal Glass Container */
+        .royal-glass {
+            background: rgba(20, 8, 34, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* LETTER CARD HIGH READABILITY SPECIFIC STYLING */
+        .letter-card-illuminated {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 248, 220, 0.08) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 2px solid rgba(212, 175, 55, 0.7);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .royal-input {
+            background: rgba(10, 6, 18, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .royal-input:focus {
+            border-color: #f3e5ab;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            outline: none;
+        }
+
+        /* Gold Foil Header Text */
+        .gold-royal-text {
+            background: linear-gradient(135deg, #ffffff 0%, #f3e5ab 40%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Solid Bright White No Button */
+        .bright-white-no-btn {
+            background-color: #FFFFFF !important;
+            color: #111111 !important;
+            font-weight: 800 !important;
+            border: 2px solid #d4af37 !important;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.95), 0 0 12px rgba(212, 175, 55, 0.8);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        @keyframes pulseCrimsonGlow {
+            0%, 100% { box-shadow: 0 0 25px rgba(217, 4, 41, 0.6), 0 0 45px rgba(139, 0, 32, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(217, 4, 41, 0.9), 0 0 60px rgba(212, 175, 55, 0.6); }
+        }
+        .pulse-royal {
+            animation: pulseCrimsonGlow 2.5s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0612; }
+        ::-webkit-scrollbar-thumb { background: #8b0020; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex flex-col justify-between min-h-screen">
+
+    <!-- Atmospheric Overlay & Canvas Petals -->
+    <div class="royal-fog"></div>
+    <canvas id="ambientCanvas"></canvas>
+
+    <!-- Header Navigation & Music Toggle -->
+    <header class="relative z-50 p-4 sm:p-6 flex justify-between items-center max-w-5xl mx-auto w-full">
+        <div class="flex items-center gap-2.5">
+            <span class="text-royal-crimson text-2xl animate-pulse">👑</span>
+            <span class="font-cinzel text-xs sm:text-sm tracking-widest uppercase text-royal-lightGold font-bold">Royal Rendezvous</span>
+        </div>
+
+        <!-- Audio Music Toggle -->
+        <button id="musicToggleBtn" onclick="toggleRoyalMusic()" class="royal-glass px-4 py-2.5 rounded-full text-white hover:border-royal-gold transition-all duration-300 flex items-center gap-2.5 text-xs font-semibold tracking-wider border border-royal-gold/40 shadow-gold-border">
+            <i id="musicIcon" class="fas fa-music text-royal-crimson"></i>
+            <span id="musicLabel">Royal Melody: OFF 🎵</span>
+        </button>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 container mx-auto px-4 py-4 sm:py-6 max-w-3xl flex-grow flex flex-col justify-center">
+
+        <!-- PROPOSAL CARD SECTION -->
+        <div id="proposalCard" class="royal-glass rounded-3xl p-6 sm:p-10 text-center transition-all duration-700 my-auto border border-royal-gold/30 relative overflow-hidden">
+            
+            <!-- Royal Crest Icon -->
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-royal-crimson/40 border-2 border-royal-gold text-royal-lightGold mb-5 shadow-gold-border">
+                <i class="fas fa-crown text-xl"></i>
+            </div>
+
+            <!-- Greeting -->
+            <h1 class="font-cinzel text-4xl sm:text-6xl font-black mb-6 tracking-wider gold-royal-text">
+                Maisha
+            </h1>
+
+            <!-- HIGH-CONTRAST ILLUMINATED LETTER CARD -->
+            <div class="letter-card-illuminated rounded-2xl p-6 sm:p-8 text-left sm:text-center mb-6 relative shadow-2xl">
+                <span class="absolute -top-3.5 -left-3.5 text-2xl drop-shadow">🥀</span>
+                <span class="absolute -bottom-3.5 -right-3.5 text-2xl drop-shadow">✨</span>
+
+                <div class="font-serif text-xl sm:text-2xl text-white font-semibold leading-relaxed space-y-4 tracking-wide">
+                    <p class="text-royal-lightGold font-bold text-2xl sm:text-3xl font-cinzel">Maisha,</p>
+                    <p class="text-white drop-shadow-md">
+                        I think we’ve delayed this date long enough. 🫶
+                    </p>
+                    <p class="text-white drop-shadow-md">
+                        So, how about we stop saying “someday” and finally make it our day?
+                    </p>
+                    <p class="text-royal-lightGold font-extrabold pt-2 text-2xl sm:text-3xl italic tracking-wide drop-shadow-lg">
+                        One date. You, me, and a little bit of magic. 🌷❤️
+                    </p>
+                </div>
+            </div>
+
+            <p class="font-serif text-xl sm:text-2xl text-royal-lightGold mb-4 italic tracking-wide font-medium">
+                Will you bestow me the honor of this date? 🍷✨
+            </p>
+
+            <!-- Cute Begging Tooltip -->
+            <div id="beggingText" class="h-8 text-royal-lightGold font-serif text-base sm:text-lg italic mb-2 opacity-0 transition-opacity duration-300 flex items-center justify-center gap-2">
+                <i class="fas fa-quote-left text-xs text-royal-gold/60"></i>
+                <span id="beggingMsg" class="font-semibold text-white">Are you sure, Maisha? 🥺</span>
+                <i class="fas fa-quote-right text-xs text-royal-gold/60"></i>
+            </div>
+
+            <!-- Interactive Localized Button Container -->
+            <div id="buttonArea" class="relative min-h-[120px] w-full flex items-center justify-center gap-6 py-4 px-2">
+                
+                <!-- YES BUTTON -->
+                <button id="yesBtn" onclick="acceptProposal()" class="bg-gradient-to-r from-royal-crimson via-royal-brightRed to-royal-burgundy hover:from-royal-brightRed hover:to-royal-crimson text-white font-cinzel text-lg sm:text-2xl py-4 px-8 sm:px-10 rounded-full border-2 border-royal-gold shadow-crimson-flare transition-all duration-300 flex items-center gap-3 pulse-royal z-20 font-bold tracking-wider origin-center">
+                    <i class="fas fa-heart text-royal-lightGold animate-pulse"></i>
+                    <span>Yes, My Answer is YES! 🍷</span>
+                </button>
+
+                <!-- BRIGHT WHITE NO BUTTON (Strictly Bound Adjacent to Yes) -->
+                <button id="noBtn" class="bright-white-no-btn font-cinzel text-base sm:text-lg py-3.5 px-8 rounded-full z-30 font-bold tracking-wider whitespace-nowrap">
+                    No 🕯️
+                </button>
+
+            </div>
+        </div>
+
+        <!-- STEP-BY-STEP PLANNER CARD -->
+        <div id="plannerCard" class="hidden royal-glass rounded-3xl p-6 sm:p-10 transition-all duration-500 my-auto border border-royal-gold/40">
+            
+            <div class="text-center mb-8">
+                <span class="text-3xl sm:text-4xl">👑✨🥀</span>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-bold gold-royal-text mt-2">
+                    Our Date Planner, Maisha
+                </h2>
+                <p class="text-royal-lightGold/80 font-serif text-base sm:text-lg italic mt-1">
+                    Design our royal experience step-by-step...
+                </p>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="flex justify-between items-center mb-8 max-w-lg mx-auto px-2">
+                <div class="flex flex-col items-center">
+                    <div id="stepDot1" class="w-8 h-8 rounded-full bg-royal-crimson text-white border-2 border-royal-gold flex items-center justify-center font-cinzel text-sm font-bold shadow-gold-border">1</div>
+                    <span class="text-[10px] uppercase tracking-wider text-royal-gold font-bold mt-1">Date</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-royal-burgundy mx-1" id="line1"></div>
+                <div class="flex flex-col items-center">
+                    <div id="stepDot2" class="w-8 h-8 rounded-full bg-royal-base text-royal-gold/50 border border-royal-burgundy flex items-center justify-center font-cinzel text-sm">2</div>
+                    <span class="text-[10px] uppercase tracking-wider text-royal-gold/50 font-bold mt-1">Time</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-royal-burgundy mx-1" id="line2"></div>
+                <div class="flex flex-col items-center">
+                    <div id="stepDot3" class="w-8 h-8 rounded-full bg-royal-base text-royal-gold/50 border border-royal-burgundy flex items-center justify-center font-cinzel text-sm">3</div>
+                    <span class="text-[10px] uppercase tracking-wider text-royal-gold/50 font-bold mt-1">Vibe</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-royal-burgundy mx-1" id="line3"></div>
+                <div class="flex flex-col items-center">
+                    <div id="stepDot4" class="w-8 h-8 rounded-full bg-royal-base text-royal-gold/50 border border-royal-burgundy flex items-center justify-center font-cinzel text-sm">4</div>
+                    <span class="text-[10px] uppercase tracking-wider text-royal-gold/50 font-bold mt-1">Venue</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-royal-burgundy mx-1" id="line4"></div>
+                <div class="flex flex-col items-center">
+                    <div id="stepDot5" class="w-8 h-8 rounded-full bg-royal-base text-royal-gold/50 border border-royal-burgundy flex items-center justify-center font-cinzel text-sm">5</div>
+                    <span class="text-[10px] uppercase tracking-wider text-royal-gold/50 font-bold mt-1">Wishes</span>
+                </div>
+            </div>
+
+            <!-- STEP 1: Date Selection (Strict 1-Week Rules) -->
+            <div id="step1" class="step-content space-y-6">
+                <h3 class="font-cinzel text-xl sm:text-2xl text-royal-lightGold font-bold flex items-center gap-2 border-b border-royal-gold/30 pb-3">
+                    <i class="fas fa-calendar-alt text-royal-crimson"></i> Step 1: Choose Date (Within 1 Week) 📅
+                </h3>
+
+                <div>
+                    <label class="block text-white font-serif text-base mb-2 font-medium">Select a date within the upcoming 7 days:</label>
+                    <input type="date" id="dateInput" onchange="checkDateRules()" class="w-full p-4 rounded-2xl royal-input font-serif text-lg tracking-wider font-semibold">
+                    <p class="text-xs text-royal-lightGold/70 font-serif italic mt-2">
+                        *Note: I can't wait longer than 7 days to see you! 🌹
+                    </p>
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button onclick="goToStep(2)" class="bg-royal-crimson hover:bg-royal-brightRed text-white font-cinzel font-bold py-3.5 px-8 rounded-full border border-royal-gold shadow-gold-border transition-all hover:scale-105 flex items-center gap-2">
+                        <span>Next: Choose Timing</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Timing Options -->
+            <div id="step2" class="step-content hidden space-y-6">
+                <h3 class="font-cinzel text-xl sm:text-2xl text-royal-lightGold font-bold flex items-center gap-2 border-b border-royal-gold/30 pb-3">
+                    <i class="fas fa-clock text-royal-crimson"></i> Step 2: Choose Timing ⏰
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="timeSlots">
+                    <button type="button" onclick="selectTime('11:00 AM - Morning Coffee')" class="time-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center justify-between group">
+                        <div>
+                            <div class="text-white font-bold text-base">11:00 AM</div>
+                            <div class="text-xs text-royal-lightGold/80">Morning Coffee ☕</div>
+                        </div>
+                        <i class="fas fa-check-circle text-royal-crimson group-hover:text-royal-gold transition-colors"></i>
+                    </button>
+
+                    <button type="button" onclick="selectTime('5:30 PM - Sunset Magic')" class="time-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center justify-between group">
+                        <div>
+                            <div class="text-white font-bold text-base">5:30 PM</div>
+                            <div class="text-xs text-royal-lightGold/80">Sunset Magic 🌇</div>
+                        </div>
+                        <i class="fas fa-check-circle text-royal-crimson group-hover:text-royal-gold transition-colors"></i>
+                    </button>
+
+                    <button type="button" onclick="selectTime('8:00 PM - Candlelit Evening')" class="time-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center justify-between group">
+                        <div>
+                            <div class="text-white font-bold text-base">8:00 PM</div>
+                            <div class="text-xs text-royal-lightGold/80">Candlelit Evening 🍷</div>
+                        </div>
+                        <i class="fas fa-check-circle text-royal-crimson group-hover:text-royal-gold transition-colors"></i>
+                    </button>
+
+                    <button type="button" onclick="selectTime('9:30 PM - Late Night Stroll')" class="time-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center justify-between group">
+                        <div>
+                            <div class="text-white font-bold text-base">9:30 PM</div>
+                            <div class="text-xs text-royal-lightGold/80">Late Night Stroll 🌟</div>
+                        </div>
+                        <i class="fas fa-check-circle text-royal-crimson group-hover:text-royal-gold transition-colors"></i>
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-royal-lightGold font-serif text-sm mb-2">Or write a custom timing ⏰</label>
+                    <input type="text" id="customTimeInput" placeholder="e.g. 6:45 PM" oninput="onCustomTimeInput()" class="w-full p-3.5 rounded-2xl royal-input font-serif text-sm">
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button onclick="goToStep(1)" class="bg-royal-base border border-royal-gold/30 text-white font-cinzel py-3 px-6 rounded-full hover:border-royal-gold transition-all">
+                        <i class="fas fa-arrow-left text-xs"></i> Back
+                    </button>
+                    <button onclick="goToStep(3)" class="bg-royal-crimson hover:bg-royal-brightRed text-white font-cinzel font-bold py-3.5 px-8 rounded-full border border-royal-gold shadow-gold-border transition-all hover:scale-105 flex items-center gap-2">
+                        <span>Next: Date Vibe</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Date Vibe -->
+            <div id="step3" class="step-content hidden space-y-6">
+                <h3 class="font-cinzel text-xl sm:text-2xl text-royal-lightGold font-bold flex items-center gap-2 border-b border-royal-gold/30 pb-3">
+                    <i class="fas fa-glass-cheers text-royal-crimson"></i> Step 3: Choose Date Vibe
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="dateTypes">
+                    <button type="button" onclick="selectType('Coffee Date ☕')" class="type-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center gap-4">
+                        <span class="text-2xl p-3 bg-royal-crimson/30 border border-royal-gold/40 rounded-xl">☕</span>
+                        <div>
+                            <div class="text-white font-bold text-lg">Coffee Date</div>
+                            <div class="text-xs text-royal-lightGold/70">Aromatic coffee & heartfelt chats.</div>
+                        </div>
+                    </button>
+
+                    <button type="button" onclick="selectType('Fuchka Date 😋')" class="type-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center gap-4">
+                        <span class="text-2xl p-3 bg-royal-crimson/30 border border-royal-gold/40 rounded-xl">😋</span>
+                        <div>
+                            <div class="text-white font-bold text-lg">Fuchka Date</div>
+                            <div class="text-xs text-royal-lightGold/70">Crispy, tangy street food delight.</div>
+                        </div>
+                    </button>
+
+                    <button type="button" onclick="selectType('Fast Food Date 🍔')" class="type-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center gap-4">
+                        <span class="text-2xl p-3 bg-royal-crimson/30 border border-royal-gold/40 rounded-xl">🍔</span>
+                        <div>
+                            <div class="text-white font-bold text-lg">Fast Food Date</div>
+                            <div class="text-xs text-royal-lightGold/70">Burgers, fries & fun energy.</div>
+                        </div>
+                    </button>
+
+                    <button type="button" onclick="selectType('Romantic Evening 🍷')" class="type-btn royal-glass p-4 rounded-2xl font-serif text-left border border-royal-gold/30 hover:border-royal-gold transition-all flex items-center gap-4">
+                        <span class="text-2xl p-3 bg-royal-crimson/30 border border-royal-gold/40 rounded-xl">🍷</span>
+                        <div>
+                            <div class="text-white font-bold text-lg">Romantic Evening</div>
+                            <div class="text-xs text-royal-lightGold/70">Candlelights & fine royal dining.</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button onclick="goToStep(2)" class="bg-royal-base border border-royal-gold/30 text-white font-cinzel py-3 px-6 rounded-full hover:border-royal-gold transition-all">
+                        <i class="fas fa-arrow-left text-xs"></i> Back
+                    </button>
+                    <button onclick="goToStep(4)" class="bg-royal-crimson hover:bg-royal-brightRed text-white font-cinzel font-bold py-3.5 px-8 rounded-full border border-royal-gold shadow-gold-border transition-all hover:scale-105 flex items-center gap-2">
+                        <span>Next: Venue</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 4: Restaurant Selection -->
+            <div id="step4" class="step-content hidden space-y-6">
+                <h3 class="font-cinzel text-xl sm:text-2xl text-royal-lightGold font-bold flex items-center gap-2 border-b border-royal-gold/30 pb-3">
+                    <i class="fas fa-utensils text-royal-crimson"></i> Step 4: Restaurant Selection
+                </h3>
+
+                <div class="grid grid-cols-2 gap-3" id="restaurantGrid">
+                    <button type="button" onclick="selectRestaurant('Rustic Lounge')" class="rest-btn royal-glass p-4 rounded-2xl font-serif text-center border border-royal-gold/30 hover:border-royal-gold transition-all flex flex-col items-center justify-center gap-2">
+                        <i class="fas fa-gem text-royal-gold text-xl"></i>
+                        <span class="text-white font-bold">Rustic Lounge</span>
+                    </button>
+
+                    <button type="button" onclick="selectRestaurant('Golf Inn')" class="rest-btn royal-glass p-4 rounded-2xl font-serif text-center border border-royal-gold/30 hover:border-royal-gold transition-all flex flex-col items-center justify-center gap-2">
+                        <i class="fas fa-hotel text-royal-gold text-xl"></i>
+                        <span class="text-white font-bold">Golf Inn</span>
+                    </button>
+
+                    <button type="button" onclick="selectRestaurant('90\'s Lounge')" class="rest-btn royal-glass p-4 rounded-2xl font-serif text-center border border-royal-gold/30 hover:border-royal-gold transition-all flex flex-col items-center justify-center gap-2">
+                        <i class="fas fa-music text-royal-gold text-xl"></i>
+                        <span class="text-white font-bold">90's Lounge</span>
+                    </button>
+
+                    <button type="button" onclick="selectRestaurant('Mehman Restaurant')" class="rest-btn royal-glass p-4 rounded-2xl font-serif text-center border border-royal-gold/30 hover:border-royal-gold transition-all flex flex-col items-center justify-center gap-2">
+                        <i class="fas fa-concierge-bell text-royal-gold text-xl"></i>
+                        <span class="text-white font-bold">Mehman Restaurant</span>
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-royal-lightGold font-serif text-sm mb-2">Or write another restaurant of your choice... 🕯️</label>
+                    <input type="text" id="customRestaurant" placeholder="Type restaurant name here..." oninput="onCustomRestaurantInput()" class="w-full p-3.5 rounded-2xl royal-input font-serif text-sm">
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button onclick="goToStep(3)" class="bg-royal-base border border-royal-gold/30 text-white font-cinzel py-3 px-6 rounded-full hover:border-royal-gold transition-all">
+                        <i class="fas fa-arrow-left text-xs"></i> Back
+                    </button>
+                    <button onclick="goToStep(5)" class="bg-royal-crimson hover:bg-royal-brightRed text-white font-cinzel font-bold py-3.5 px-8 rounded-full border border-royal-gold shadow-gold-border transition-all hover:scale-105 flex items-center gap-2">
+                        <span>Next: Wishes</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 5: Special Wish -->
+            <div id="step5" class="step-content hidden space-y-6">
+                <h3 class="font-cinzel text-xl sm:text-2xl text-royal-lightGold font-bold flex items-center gap-2 border-b border-royal-gold/30 pb-3">
+                    <i class="fas fa-scroll text-royal-crimson"></i> Step 5: Special Wish or Note
+                </h3>
+
+                <div>
+                    <label class="block text-royal-lightGold font-serif text-sm mb-2">Any special requests, favorite flowers, or music preferences? 🥀</label>
+                    <textarea id="specialNotes" rows="4" placeholder="e.g. Bring red roses, play acoustic songs..." class="w-full p-4 rounded-2xl royal-input font-serif text-sm leading-relaxed"></textarea>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button onclick="goToStep(4)" class="bg-royal-base border border-royal-gold/30 text-white font-cinzel py-3 px-6 rounded-full hover:border-royal-gold transition-all">
+                        <i class="fas fa-arrow-left text-xs"></i> Back
+                    </button>
+                    <button onclick="finishPlanning()" class="bg-gradient-to-r from-royal-crimson via-royal-brightRed to-royal-burgundy hover:from-royal-brightRed hover:to-royal-crimson text-white font-cinzel text-xl py-4 px-10 rounded-full border-2 border-royal-gold shadow-gold-border transition-all hover:scale-105 flex items-center gap-3 font-bold tracking-wider">
+                        <span>Seal Our Date 🍷</span>
+                        <i class="fas fa-crown text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FINAL CELEBRATION & RSVP ROYAL TICKET -->
+        <div id="summaryCard" class="hidden royal-glass rounded-3xl p-6 sm:p-10 text-center transition-all duration-700 my-auto border-2 border-royal-gold/60 relative overflow-hidden">
+            
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-royal-crimson/50 border-2 border-royal-gold text-royal-lightGold mb-4 shadow-gold-border">
+                <i class="fas fa-wine-glass-alt text-2xl"></i>
+            </div>
+            
+            <h2 class="font-cinzel text-3xl sm:text-5xl font-black gold-royal-text mb-2">
+                Royal Invitation Confirmed
+            </h2>
+            <p class="text-royal-lightGold font-serif text-base sm:text-lg italic mb-6">
+                Here is your VIP Rendezvous Pass, Maisha:
+            </p>
+
+            <!-- Luxury Gold Ticket Card -->
+            <div class="bg-gradient-to-b from-royal-base to-royal-midnight border-2 border-royal-gold/70 rounded-2xl p-6 text-left shadow-2xl space-y-4 max-w-md mx-auto mb-8 relative">
+                <div class="absolute top-3 right-3 text-[10px] tracking-widest font-cinzel text-royal-gold uppercase border border-royal-gold/40 px-3 py-1 rounded-full font-bold">Royal VIP Pass</div>
+
+                <div class="flex items-center gap-3 border-b border-royal-gold/20 pb-3">
+                    <span class="text-xl text-royal-gold">📅</span>
+                    <div>
+                        <div class="text-[10px] text-royal-lightGold/60 font-cinzel uppercase tracking-widest">Date</div>
+                        <div id="summaryDate" class="text-white font-serif font-bold text-base">Not selected</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 border-b border-royal-gold/20 pb-3">
+                    <span class="text-xl text-royal-gold">⏰</span>
+                    <div>
+                        <div class="text-[10px] text-royal-lightGold/60 font-cinzel uppercase tracking-widest">Time</div>
+                        <div id="summaryTime" class="text-white font-serif font-bold text-base">Not selected</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 border-b border-royal-gold/20 pb-3">
+                    <span class="text-xl text-royal-gold">🥀</span>
+                    <div>
+                        <div class="text-[10px] text-royal-lightGold/60 font-cinzel uppercase tracking-widest">Vibe</div>
+                        <div id="summaryType" class="text-white font-serif font-bold text-base">Romantic Evening 🍷</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 border-b border-royal-gold/20 pb-3">
+                    <span class="text-xl text-royal-gold">📍</span>
+                    <div>
+                        <div class="text-[10px] text-royal-lightGold/60 font-cinzel uppercase tracking-widest">Venue</div>
+                        <div id="summaryRestaurant" class="text-royal-lightGold font-serif font-bold text-base">Rustic Lounge</div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <span class="text-xl text-royal-gold">📜</span>
+                    <div>
+                        <div class="text-[10px] text-royal-lightGold/60 font-cinzel uppercase tracking-widest">Special Wish</div>
+                        <div id="summaryNotes" class="text-white/80 font-serif text-sm italic">None</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="sendPlanWhatsApp()" class="bg-emerald-800 hover:bg-emerald-700 text-white font-cinzel text-lg py-3.5 px-8 rounded-full border border-emerald-400 shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-3 font-bold">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Send Plan via WhatsApp</span>
+                </button>
+
+                <button onclick="copyTicketSummary()" class="bg-royal-crimson hover:bg-royal-brightRed text-white font-cinzel text-lg py-3.5 px-6 rounded-full border border-royal-gold shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-2 font-bold">
+                    <i class="fas fa-copy"></i>
+                    <span id="copyBtnText">Copy Ticket Summary</span>
+                </button>
+            </div>
+            
+            <p class="text-xs font-serif text-royal-lightGold/60 italic mt-6">
+                Counting down the moments until our date, Maisha... 👑🥀
+            </p>
+        </div>
+
+    </main>
+
+    <!-- POPUP MODAL FOR STRICT 1-WEEK DATE INTERCEPTION -->
+    <div id="dateBegModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-royal-base/85 backdrop-blur-md">
+        <div class="royal-glass rounded-3xl p-6 sm:p-8 max-w-md w-full text-center border-2 border-royal-gold shadow-2xl relative">
+            <div class="text-4xl mb-3">🥺🥀❤️</div>
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold gold-royal-text mb-3">
+                I Can't Wait That Long!
+            </h3>
+            <p id="dateModalBegMsg" class="font-serif text-lg text-white leading-relaxed mb-6 italic">
+                I can't wait that long to see you, Maisha! 🥺 Please make it quick, pick a closer day... my heart can't wait! 🥀❤️
+            </p>
+            <button onclick="closeBegModal()" class="bg-gradient-to-r from-royal-crimson to-royal-brightRed hover:from-royal-brightRed hover:to-royal-crimson text-white font-cinzel font-bold py-3.5 px-8 rounded-full border border-royal-gold shadow-gold-border">
+                I'll Choose a Closer Day! 🌷
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-4 text-center text-xs text-royal-gold/50 font-cinzel tracking-widest uppercase">
+        Created Exclusively for Maisha • Royal Rendezvous 🥀
+    </footer>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // State Variables
+        let selectedDate = '';
+        let selectedTime = '5:30 PM - Sunset Magic';
+        let selectedType = 'Romantic Evening 🍷';
+        let selectedRestaurant = 'Rustic Lounge';
+        let specialNotes = '';
+        let noCount = 0;
+        let isMusicPlaying = false;
+        let minAllowedDateStr = '';
+        let maxAllowedDateStr = '';
+
+        // Audio Engine
+        let pianoSynth = null;
+        let reverb = null;
+        let melodyLoop = null;
+
+        // Cute Begging Tooltip messages for dodging "No"
+        const beggingMessages = [
+            "Are you sure, Maisha? 🥺",
+            "I bought flowers already! 🌹",
+            "Don't be so cold 🥀",
+            "Destiny says YES! ✨",
+            "Give us a chance! ❤️",
+            "Look how big YES is getting! 🌟",
+            "Even the moonlight beckons us... 🌘",
+            "One date with a little magic... 🕯️"
+        ];
+
+        // Canvas Particles
+        function initAmbientCanvas() {
+            const canvas = document.getElementById('ambientCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            for (let i = 0; i < 35; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 6 + 2,
+                    speedY: Math.random() * 0.8 + 0.3,
+                    speedX: Math.random() * 0.5 - 0.25,
+                    rotation: Math.random() * 360,
+                    rotSpeed: Math.random() * 1.2 - 0.6,
+                    color: Math.random() > 0.35 ? 'rgba(217, 4, 41, ' : 'rgba(212, 175, 55, ',
+                    opacity: Math.random() * 0.5 + 0.3
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color + p.opacity + ')';
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.quadraticCurveTo(p.size, -p.size, p.size * 2, 0);
+                    ctx.quadraticCurveTo(p.size, p.size, 0, 0);
+                    ctx.fill();
+                    ctx.restore();
+
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += p.rotSpeed;
+
+                    if (p.y > height + 20) {
+                        p.y = -20;
+                        p.x = Math.random() * width;
+                    }
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Audio Effects
+        function playChime(freq = "E4", duration = "8n") {
+            try {
+                const chime = new Tone.Synth({
+                    oscillator: { type: "sine" },
+                    envelope: { attack: 0.05, decay: 0.3, sustain: 0.1, release: 0.8 }
+                }).toDestination();
+                chime.volume.value = -8;
+                chime.triggerAttackRelease(freq, duration);
+            } catch(e) {}
+        }
+
+        async function setupRoyalMusic() {
+            await Tone.start();
+            if (!pianoSynth) {
+                reverb = new Tone.Reverb({ decay: 4.5, wet: 0.45 }).toDestination();
+                
+                pianoSynth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: "sine" },
+                    envelope: { attack: 0.3, decay: 1.5, sustain: 0.5, release: 2.5 }
+                }).connect(reverb);
+                pianoSynth.volume.value = -12;
+
+                const pattern = [
+                    { time: "0:0", note: ["A3", "C#4", "E4"] },
+                    { time: "0:2", note: ["A4"] },
+                    { time: "1:0", note: ["F#3", "A3", "C#4"] },
+                    { time: "1:2", note: ["E4"] },
+                    { time: "2:0", note: ["D3", "F#3", "A3"] },
+                    { time: "2:2", note: ["C#4"] },
+                    { time: "3:0", note: ["E3", "G#3", "B3"] },
+                    { time: "3:2", note: ["E4"] }
+                ];
+
+                melodyLoop = new Tone.Part((time, value) => {
+                    pianoSynth.triggerAttackRelease(value.note, "2n", time);
+                }, pattern);
+
+                melodyLoop.loop = true;
+                melodyLoop.loopEnd = "4m";
+                Tone.Transport.bpm.value = 50;
+            }
+        }
+
+        async function toggleRoyalMusic() {
+            const label = document.getElementById('musicLabel');
+            const icon = document.getElementById('musicIcon');
+
+            if (!isMusicPlaying) {
+                await setupRoyalMusic();
+                Tone.Transport.start();
+                melodyLoop.start(0);
+                isMusicPlaying = true;
+                label.innerText = 'Royal Melody: ON 🎵';
+                icon.className = 'fas fa-pause text-royal-gold';
+            } else {
+                Tone.Transport.stop();
+                if (melodyLoop) melodyLoop.stop();
+                isMusicPlaying = false;
+                label.innerText = 'Royal Melody: OFF 🎵';
+                icon.className = 'fas fa-music text-royal-crimson';
+            }
+        }
+
+        // Calendar Date Bounds (Min Today, Max 7 Days)
+        function setCalendarBounds() {
+            const dateInput = document.getElementById('dateInput');
+            const today = new Date();
+            
+            const maxDate = new Date();
+            maxDate.setDate(today.getDate() + 7);
+
+            function formatDate(d) {
+                const yyyy = d.getFullYear();
+                let mm = d.getMonth() + 1;
+                let dd = d.getDate();
+                if (mm < 10) mm = '0' + mm;
+                if (dd < 10) dd = '0' + dd;
+                return `${yyyy}-${mm}-${dd}`;
+            }
+
+            minAllowedDateStr = formatDate(today);
+            maxAllowedDateStr = formatDate(maxDate);
+
+            dateInput.min = minAllowedDateStr;
+            dateInput.max = maxAllowedDateStr;
+            
+            const defaultDate = new Date();
+            defaultDate.setDate(today.getDate() + 2);
+            const formattedDefault = formatDate(defaultDate);
+            
+            dateInput.value = formattedDefault;
+            selectedDate = formattedDefault;
+        }
+
+        // Check Date Rules (Strict 1-Week & Far-Date Begging)
+        function checkDateRules() {
+            const dateInput = document.getElementById('dateInput');
+            const chosenVal = dateInput.value;
+            if (!chosenVal) return;
+
+            const chosen = new Date(chosenVal);
+            const today = new Date(minAllowedDateStr);
+
+            const diffTime = chosen.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays >= 4) {
+                playChime("C4", "16n");
+                document.getElementById('dateBegModal').classList.remove('hidden');
+
+                // Reset to closer day (within 1-3 days)
+                const closeDate = new Date();
+                closeDate.setDate(today.getDate() + 2);
+                const yyyy = closeDate.getFullYear();
+                let mm = closeDate.getMonth() + 1;
+                let dd = closeDate.getDate();
+                if (mm < 10) mm = '0' + mm;
+                if (dd < 10) dd = '0' + dd;
+
+                dateInput.value = `${yyyy}-${mm}-${dd}`;
+                selectedDate = `${yyyy}-${mm}-${dd}`;
+            } else {
+                selectedDate = chosenVal;
+            }
+        }
+
+        function closeBegModal() {
+            document.getElementById('dateBegModal').classList.add('hidden');
+        }
+
+        // STRICT LOCALIZED EVASIVE "NO" BUTTON (60px - 110px radius adjacent to Yes)
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const beggingText = document.getElementById('beggingText');
+        const beggingMsg = document.getElementById('beggingMsg');
+
+        function dodgeNoButton(e) {
+            if (e) e.preventDefault();
+            noCount++;
+            playChime("C4", "16n");
+
+            // Update Begging Msg
+            const msgIndex = (noCount - 1) % beggingMessages.length;
+            beggingMsg.innerText = beggingMessages[msgIndex];
+            beggingText.classList.remove('opacity-0');
+
+            // Enlarge YES Button
+            const currentScale = Math.min(1 + (noCount * 0.08), 1.55);
+            yesBtn.style.transform = `scale(${currentScale})`;
+
+            // Restrict displacement strictly between 60px and 110px adjacent to Yes
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.floor(Math.random() * 50) + 60; 
+            
+            const offsetX = Math.cos(angle) * distance;
+            const offsetY = Math.sin(angle) * distance;
+
+            noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        }
+
+        noBtn.addEventListener('mouseenter', dodgeNoButton);
+        noBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+        noBtn.addEventListener('click', dodgeNoButton);
+
+        // ACCEPT PROPOSAL
+        function acceptProposal() {
+            playChime("E4", "2n");
+            
+            if (!isMusicPlaying) {
+                toggleRoyalMusic();
+            }
+
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#d4af37', '#8b0020', '#f3e5ab', '#ffffff']
+            });
+
+            document.getElementById('proposalCard').classList.add('hidden');
+            document.getElementById('plannerCard').classList.remove('hidden');
+
+            selectTime('5:30 PM - Sunset Magic');
+            selectType('Romantic Evening 🍷');
+            selectRestaurant('Rustic Lounge');
+        }
+
+        // STEP NAVIGATION
+        function goToStep(stepNum) {
+            playChime("G4", "8n");
+            document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`step${stepNum}`).classList.remove('hidden');
+
+            for (let i = 1; i <= 5; i++) {
+                const dot = document.getElementById(`stepDot${i}`);
+                if (i <= stepNum) {
+                    dot.className = 'w-8 h-8 rounded-full bg-royal-crimson text-white border-2 border-royal-gold flex items-center justify-center font-cinzel text-sm font-bold shadow-gold-border';
+                } else {
+                    dot.className = 'w-8 h-8 rounded-full bg-royal-base text-royal-gold/50 border border-royal-burgundy flex items-center justify-center font-cinzel text-sm';
+                }
+            }
+
+            for (let l = 1; l < 5; l++) {
+                const line = document.getElementById(`line${l}`);
+                if (l < stepNum) {
+                    line.className = 'flex-1 h-0.5 bg-royal-gold mx-1';
+                } else {
+                    line.className = 'flex-1 h-0.5 bg-royal-burgundy mx-1';
+                }
+            }
+        }
+
+        // SELECTIONS
+        function selectTime(timeStr) {
+            selectedTime = timeStr;
+            document.getElementById('customTimeInput').value = '';
+
+            const buttons = document.querySelectorAll('#timeSlots .time-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(timeStr.split(' ')[0])) {
+                    btn.classList.add('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.remove('border-royal-gold/30');
+                } else {
+                    btn.classList.remove('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.add('border-royal-gold/30');
+                }
+            });
+        }
+
+        function onCustomTimeInput() {
+            const inputVal = document.getElementById('customTimeInput').value.trim();
+            if (inputVal !== '') {
+                selectedTime = inputVal;
+                const buttons = document.querySelectorAll('#timeSlots .time-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.add('border-royal-gold/30');
+                });
+            }
+        }
+
+        function selectType(typeStr) {
+            selectedType = typeStr;
+            const buttons = document.querySelectorAll('#dateTypes .type-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(typeStr.split(' ')[0])) {
+                    btn.classList.add('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.remove('border-royal-gold/30');
+                } else {
+                    btn.classList.remove('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.add('border-royal-gold/30');
+                }
+            });
+        }
+
+        function selectRestaurant(restName) {
+            selectedRestaurant = restName;
+            document.getElementById('customRestaurant').value = '';
+
+            const buttons = document.querySelectorAll('#restaurantGrid .rest-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(restName)) {
+                    btn.classList.add('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.remove('border-royal-gold/30');
+                } else {
+                    btn.classList.remove('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.add('border-royal-gold/30');
+                }
+            });
+        }
+
+        function onCustomRestaurantInput() {
+            const inputVal = document.getElementById('customRestaurant').value.trim();
+            if (inputVal !== '') {
+                selectedRestaurant = inputVal;
+                const buttons = document.querySelectorAll('#restaurantGrid .rest-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('border-royal-gold', 'bg-royal-crimson/30', 'shadow-gold-border');
+                    btn.classList.add('border-royal-gold/30');
+                });
+            }
+        }
+
+        function finishPlanning() {
+            playChime("A4", "2n");
+
+            const dateVal = document.getElementById('dateInput').value;
+            if (dateVal) {
+                const dateObj = new Date(dateVal);
+                selectedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+
+            specialNotes = document.getElementById('specialNotes').value.trim();
+
+            document.getElementById('summaryDate').innerText = selectedDate || "Upcoming Day";
+            document.getElementById('summaryTime').innerText = selectedTime;
+            document.getElementById('summaryType').innerText = selectedType;
+            document.getElementById('summaryRestaurant').innerText = selectedRestaurant || "Rustic Lounge";
+            document.getElementById('summaryNotes').innerText = specialNotes !== '' ? `"${specialNotes}"` : "None";
+
+            document.getElementById('plannerCard').classList.add('hidden');
+            document.getElementById('summaryCard').classList.remove('hidden');
+
+            confetti({
+                particleCount: 180,
+                spread: 110,
+                origin: { y: 0.5 },
+                colors: ['#d4af37', '#f3e5ab', '#ffffff', '#8b0020']
+            });
+        }
+
+        // WhatsApp Export & Clipboard
+        function getSummaryText() {
+            let msg = `Maisha accepted your date invitation! 👑🍷\n\n📅 Date: ${selectedDate}\n⏰ Time: ${selectedTime}\n✨ Vibe: ${selectedType}\n📍 Venue: ${selectedRestaurant}`;
+            if (specialNotes !== '') {
+                msg += `\n📜 Special Wish: ${specialNotes}`;
+            }
+            msg += `\n\nSee you soon, Maisha! 🥀❤️`;
+            return msg;
+        }
+
+        function sendPlanWhatsApp() {
+            const text = encodeURIComponent(getSummaryText());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function copyTicketSummary() {
+            const text = getSummaryText();
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            const copyBtnText = document.getElementById('copyBtnText');
+            copyBtnText.innerText = 'Ticket Copied! 🍷';
+            setTimeout(() => {
+                copyBtnText.innerText = 'Copy Ticket Summary';
+            }, 2500);
+        }
+
+        window.onload = function() {
+            initAmbientCanvas();
+            setCalendarBounds();
+        };
+    </script>
+</body>
+</html>
+```
